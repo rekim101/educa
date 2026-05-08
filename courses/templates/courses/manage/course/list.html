@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}My courses{% endblock %} </title>
+</head>
+<body>
+    {% block content %}
+        <h1>My courses</h1>
+        <div class="module">
+            {% for course in object_list %}
+                <div class="course-info">
+                    <h3>{{ course.title }}</h3>
+                    <p>
+                        <a href="{% url 'course_edit' course.id %}">Edit</a>
+                        <a href="{% url 'course_delete' course.id %}">Delete</a>
+                    </p>
+                </div>
+            {% empty %}
+                <p>You haven't created any courses yet.</p>
+            {% endfor %}
+            <p>
+                <a href="{% url 'course_create' %}">Create a new course</a>
+            </p>
+        </div>
+    {% endblock %}
+</body>
+</html>
